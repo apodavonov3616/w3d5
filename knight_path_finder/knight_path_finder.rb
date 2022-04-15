@@ -25,23 +25,23 @@ class KnightPathFinder
     end
 
     def self.valid_moves(pos)
+        x, y = pos
         possible_moves = []
-        MOVES.each do |adder|
-            possible_moves << [adder[0] + @current_position.value[0], adder[1] + @current_position.value[1]]
-        end
-        possible_moves.select { |ele| ele.all? { |num| num> -1 && num < 8 } }
+        return possible_moves unless [0..7].to_a.include?(x) && [0..7].to_a.include?(y)
+        MOVES.each {|adder| possible_moves << [adder[0] + x, adder[1] + y]}
+        possible_moves.select { |ele| ele.all? { |num| num > -1 && num < 8 } }
     end
 
     def new_move_positions(pos)
         moves = KnightPathFinder.valid_moves(pos)
         moves.reject! {|move| @considered_positions.include?(move)}
-        @considered_positions.concat(moves)
+        moves.each {|move| @considered_positions << move}
         moves
     end
 
-    def find_path(pos)
+    # def find_path(pos)
 
-    end
+    # end
 
 end 
 
