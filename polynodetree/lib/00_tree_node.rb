@@ -33,6 +33,19 @@ class PolyTreeNode
     nil
   end
 
+  def bfs(target_value)
+    node = self
+    queue = [node]
+    until queue.empty?
+      check_node = queue.shift
+      return check_node if target_value == check_node.value
+      check_node.children.each do |child|
+        queue.push(child)
+      end
+    end
+    nil
+  end
+
   def inspect
     "#<Stack:#{self.value}>"
   end
